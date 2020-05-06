@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Professional Software Development in 2020',
+    date: 'Jan 1st, 2020',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -98,7 +114,46 @@ const data = [
 
     <span class='expandButton'></span>
   </div>
+*/
 
+function create_article( article_data )
+{
+  const article = document.createElement( "div" );
+  article.className = "article";
+  
+  const title = document.createElement( "h2" )
+  title.textContent = article_data.title;
+
+  const date = document.createElement( "p" );
+  date.className = "date";
+  date.textContent = article_data.date;
+
+  const first_paragraph = document.createElement( "p" );
+  first_paragraph.textContent = article_data.firstParagraph;
+
+  const second_paragraph = document.createElement( "p" );
+  second_paragraph.textContent = article_data.secondParagraph;
+
+  const third_paragraph = document.createElement( "p" );
+  third_paragraph.textContent = article_data.thirdParagraph;
+
+  const span_button = document.createElement( "span" );
+  span_button.className = "expandButton";
+  span_button.textContent = "\u25bc";
+  span_button.addEventListener( "click", function( e )
+  {
+    article.classList.toggle( "article-open" );
+    span_button.textContent = span_button.textContent === "\u25bc" ? "\u25b2" : "\u25bc";
+  } );
+
+  [ title, date, first_paragraph, second_paragraph, third_paragraph, span_button ].forEach( element => article.appendChild( element ) );
+
+  return article;
+}
+
+data.forEach( data => document.querySelector( ".articles" ).appendChild( create_article( data ) ) );
+
+/*
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
